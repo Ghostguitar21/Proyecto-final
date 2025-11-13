@@ -144,10 +144,22 @@ strong, b {
     font-size: 26px;
     font-family: "Montserrat";
     color:#890000;
-    outline: 5px solid #890000;
+    outline: 10px solid #890000;
     border-radius: 5px;
     padding: 20px 30px;
     font-weight: bold;
     text-align: left;
+    cursor: pointer;
 
+
+
+
+}
+
+.info {
+    position: relative; 
+    top: 320px;
+    height: 50px;
+    width: 100%;
+    background-color: #79102D;
 }
