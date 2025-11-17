@@ -4,25 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto final</title>
+
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets\style.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+
+    <link rel="stylesheet" href="assets/style.css"/>
     <script src="assets/main.js"></script>
+
+    <!-- Estilos del Tetris -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
- <header class="header-area">
-        
-    </header>
+
+<body class="Cuerpo">
+
+    <header class="header-area"></header>
+
     <div class="bar">
-    <img class="logo" src="imagenes\UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo"> 
-     <nav class="header_navegation">
-        <a href="index.html">Inicio</a>
-        <a href="calendario.html">Gestionar actividades</a>
-        <a href="video.html">Video</a>
+        <img class="logo" src="imagenes/UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo"> 
+        <nav class="header_navegation">
+            <a href="index.html">Inicio</a>
+            <a href="calendario.html">Gestionar actividades</a>
+            <a href="video.html">Video</a>
         </nav>
     </div>
- <h1 class="Center" content="width=device-width, initial-scale=1" alt="frame "></h1>
 
-    <h5 class="info"></h5>
+    <!-- ***** CONTENEDOR ROJO (AQUÍ VA AHORA EL TETRIS) ***** -->
+    <div class="Center" style="padding-top: 20px; text-align:center;">
+        <h1>Tetris</h1>
+
+        <div style="display:flex; justify-content:center; margin-top:20px;">
+            <canvas id="game" width="400" height="600"></canvas>
+        </div>
+    </div>
+    <!-- ******************************************************** -->
+
+    <script src="tetris.js"></script>
+
 </body>
 </html>
