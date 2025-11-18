@@ -143,7 +143,7 @@ strong, b {
     position: relative;
     height: 500px;
     display: block; 
-    margin-top: 45px;
+    margin-top: 0;
     width: 100%;
     max-width: 100%;
     object-fit: cover;
@@ -1017,6 +1017,7 @@ overflow: scroll;
         text-align: center;
         gap: 20px;
     }
+}
 
     .respiracion-container {
         grid-template-columns: 1fr;
@@ -1039,7 +1040,9 @@ overflow: scroll;
     }
 
     .gestor-titulo {
-        font-size: 24px;
+        font-size: 24px;}
+
+        
 @media (max-width: 1024px){
     video {
         height: auto;
@@ -1051,7 +1054,7 @@ overflow: scroll;
 @media (max-width: 768px) {
   .video {
         height: auto;
-        width: 95%;
+        width: 80%;
         max-width: 700px;
     }
 }
@@ -1059,7 +1062,7 @@ overflow: scroll;
 @media (max-width: 480px) {
     .video {
         height: auto;
-        width: 100%;
-        max-width: 100%;
+        width: 80%;
+        max-width: 300px;
     }
 }
