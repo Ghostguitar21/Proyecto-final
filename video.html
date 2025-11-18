@@ -3,26 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto final</title>
+    <title>Técnicas de Manejo de Estrés - UAO</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets\style.css"/>
-    <script src="assets/main.js"></script>
+    <link rel="stylesheet" href="assets/style.css"/>
+    <script defer src="assets/main.js"></script>
 </head>
-<body>
- <header class="header-area">
-        
-    </header>
+<body class="Cuerpo">
+    <header class="header-area"></header>
+    
     <div class="bar">
-    <img class="logo" src="imagenes\UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo"> 
-     <nav class="header_navegation">
-        <a href="index.html">Inicio</a>
-        <a href="calendario.html">Gestionar actividades</a>
-        <a href="juego.html">Juego</a>
+        <img class="logo" src="imagenes/UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo"> 
+        <nav class="header_navegation">
+            <a href="index.html">Inicio</a>
+            <a href="calendario.html">Gestionar actividades</a>
+            <a href="juego.html">Juego</a>
         </nav>
     </div>
- <h1 class="Center" content="width=device-width, initial-scale=1" alt="frame "></h1>
+
+    <div class="contenedor-tecnicas">
+        <h1 class="titulo-principal">Técnicas de Manejo del Estrés</h1>
+        <p class="subtitulo-principal">Toma un momento para relajarte y reducir tu nivel de estrés</p>
+
+        <!-- Técnica de Respiración 4-7-8 -->
+        <section class="seccion-tecnica">
+            <div class="tecnica-header">
+                <h2 class="tecnica-titulo">
+                    <i class="fas fa-wind"></i> Respiración 4-7-8
+                </h2>
+                <p class="tecnica-descripcion">
+                    Esta técnica de respiración ayuda a calmar el sistema nervioso y reducir la ansiedad en minutos.
+                </p>
+            </div>
+
+            <div class="respiracion-container">
+                <div class="respiracion-visual">
+                    <div id="circuloRespiracion" class="circulo-respiracion"></div>
+                    <div id="textoRespiracion" class="texto-respiracion">Presiona Iniciar</div>
+                </div>
+
+                <div class="respiracion-controles">
+                    <button id="btnIniciarRespiracion" class="btn-respiracion btn-iniciar">
+                        <i class="fas fa-play"></i> Iniciar Ejercicio
+                    </button>
+                    <button id="btnDetenerRespiracion" class="btn-respiracion btn-detener" style="display: none;">
+                        <i class="fas fa-stop"></i> Detener
+                    </button>
+                    <div class="respiracion-info">
+                        <p><strong>Ciclos completados:</strong> <span id="ciclosCompletados">0</span></p>
+                    </div>
+                </div>
+
+                <div class="respiracion-instrucciones">
+                    <h3>¿Cómo funciona?</h3>
+                    <ol>
+                        <li><strong>Inhala</strong> por la nariz durante <strong>4 segundos</strong></li>
+                        <li><strong>Sostén</strong> la respiración durante <strong>7 segundos</strong></li>
+                        <li><strong>Exhala</strong> por la boca durante <strong>8 segundos</strong></li>
+                        <li>Repite el ciclo al menos 4 veces</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consejos Rápidos -->
+        <section class="seccion-tecnica">
+            <h2 class="tecnica-titulo">
+                <i class="fas fa-lightbulb"></i> Consejos Rápidos para Reducir el Estrés
+            </h2>
+            
+            <div class="consejos-grid">
+                <div class="consejo-card">
+                    <div class="consejo-icono">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <h3>Camina 5 minutos</h3>
+                    <p>Un breve paseo puede ayudar a despejar tu mente y reducir la tensión.</p>
+                </div>
+
+                <div class="consejo-card">
+                    <div class="consejo-icono">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Escucha música</h3>
+                    <p>La música relajante puede disminuir los niveles de cortisol y mejorar tu estado de ánimo.</p>
+                </div>
+
+                <div class="consejo-card">
+                    <div class="consejo-icono">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Hidrátate</h3>
+                    <p>Beber agua ayuda a tu cuerpo a funcionar mejor y puede reducir la fatiga.</p>
+                </div>
+
+                <div class="consejo-card">
+                    <div class="consejo-icono">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3>Sonríe</h3>
+                    <p>Incluso una sonrisa forzada puede activar neurotransmisores que mejoran tu humor.</p>
+                </div>
+
+                <div class="consejo-card">
+                    <div class="consejo-icono">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Habla con alguien</h3>
+                    <p>Compartir tus preocupaciones con un amigo puede aliviar la carga emocional.</p>
+                </div>
+
+                <div class="consejo-card">
+                    <div class="consejo-icono">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3>Descansa bien</h3>
+                    <p>Dormir 7-8 horas diarias es fundamental para manejar el estrés efectivamente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Relajación Muscular Progresiva -->
+        <section class="seccion-tecnica">
+            <h2 class="tecnica-titulo">
+                <i class="fas fa-spa"></i> Relajación Muscular Progresiva
+            </h2>
+            <p class="tecnica-descripcion">
+                Esta técnica consiste en tensar y relajar diferentes grupos musculares para liberar la tensión física.
+            </p>
+
+            <div class="relajacion-pasos">
+                <div class="paso-relajacion">
+                    <div class="paso-numero">1</div>
+                    <div class="paso-contenido">
+                        <h3>Manos y Brazos</h3>
+                        <p>Cierra los puños fuertemente por 5 segundos, luego relájalos completamente. Siente la diferencia.</p>
+                    </div>
+                </div>
+
+                <div class="paso-relajacion">
+                    <div class="paso-numero">2</div>
+                    <div class="paso-contenido">
+                        <h3>Hombros y Cuello</h3>
+                        <p>Eleva los hombros hacia las orejas, mantén la tensión 5 segundos y suelta lentamente.</p>
+                    </div>
+                </div>
+
+                <div class="paso-relajacion">
+                    <div class="paso-numero">3</div>
+                    <div class="paso-contenido">
+                        <h3>Rostro</h3>
+                        <p>Arruga la frente y cierra los ojos con fuerza. Mantén 5 segundos y relaja.</p>
+                    </div>
+                </div>
+
+                <div class="paso-relajacion">
+                    <div class="paso-numero">4</div>
+                    <div class="paso-contenido">
+                        <h3>Abdomen</h3>
+                        <p>Contrae los músculos abdominales, mantén la tensión y luego relaja completamente.</p>
+                    </div>
+                </div>
+
+                <div class="paso-relajacion">
+                    <div class="paso-numero">5</div>
+                    <div class="paso-contenido">
+                        <h3>Piernas y Pies</h3>
+                        <p>Tensa los músculos de las piernas y apunta los dedos de los pies. Mantén y relaja.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <h5 class="info"></h5>
+
+    <script>
+        // Script para la animación de respiración 4-7-8
+        let respiracionActiva = false;
+        let ciclos = 0;
+        let animacionTimeout;
+
+        const circulo = document.getElementById('circuloRespiracion');
+        const texto = document.getElementById('textoRespiracion');
+        const btnIniciar = document.getElementById('btnIniciarRespiracion');
+        const btnDetener = document.getElementById('btnDetenerRespiracion');
+        const contadorCiclos = document.getElementById('ciclosCompletados');
+
+        function iniciarRespiracion() {
+            respiracionActiva = true;
+            btnIniciar.style.display = 'none';
+            btnDetener.style.display = 'inline-flex';
+            cicloRespiracion();
+        }
+
+        function detenerRespiracion() {
+            respiracionActiva = false;
+            btnIniciar.style.display = 'inline-flex';
+            btnDetener.style.display = 'none';
+            clearTimeout(animacionTimeout);
+            circulo.className = 'circulo-respiracion';
+            texto.textContent = 'Ejercicio detenido';
+        }
+
+        function cicloRespiracion() {
+            if (!respiracionActiva) return;
+
+            // Fase 1: Inhalar (4 segundos)
+            circulo.className = 'circulo-respiracion inhalar';
+            texto.textContent = 'Inhala por la nariz (4s)';
+            
+            animacionTimeout = setTimeout(() => {
+                if (!respiracionActiva) return;
+                
+                // Fase 2: Sostener (7 segundos)
+                circulo.className = 'circulo-respiracion sostener';
+                texto.textContent = 'Sostén la respiración (7s)';
+                
+                animacionTimeout = setTimeout(() => {
+                    if (!respiracionActiva) return;
+                    
+                    // Fase 3: Exhalar (8 segundos)
+                    circulo.className = 'circulo-respiracion exhalar';
+                    texto.textContent = 'Exhala por la boca (8s)';
+                    
+                    animacionTimeout = setTimeout(() => {
+                        if (!respiracionActiva) return;
+                        
+                        // Incrementar contador de ciclos
+                        ciclos++;
+                        contadorCiclos.textContent = ciclos;
+                        
+                        // Repetir el ciclo
+                        cicloRespiracion();
+                    }, 8000);
+                }, 7000);
+            }, 4000);
+        }
+
+        btnIniciar.addEventListener('click', iniciarRespiracion);
+        btnDetener.addEventListener('click', detenerRespiracion);
+    </script>
 </body>
 </html>
