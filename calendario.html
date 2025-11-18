@@ -3,25 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto final</title>
+    <title>Gestor de Actividades - UAO</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets\style.css"/>
-    <script src="assets/main.js"></script>
+    <link rel="stylesheet" href="assets/style.css"/>
+    <script defer src="assets/main.js"></script>
 </head>
-<body>
- <header class="header-area">
-        
-    </header>
+<body class="Cuerpo">
+    <header class="header-area"></header>
+    
     <div class="bar">
-    <img class="logo" src="imagenes\UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo"> 
-     <nav class="header_navegation">
-        <a href="index.html">Inicio</a>
-        <a href="video.html">Video</a>
-        <a href="juego.html">Juego</a>
+        <img class="logo" src="imagenes/UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo"> 
+        <nav class="header_navegation">
+            <a href="index.html">Inicio</a>
+            <a href="video.html">Técnicas de estrés</a>
+            <a href="juego.html">Juego</a>
         </nav>
     </div>
- 
+
+    <div class="contenedor-gestor">
+        <!-- Encabezado del gestor -->
+        <div class="gestor-header">
+            <div>
+                <h1 class="gestor-titulo">Gestor de Actividades</h1>
+                <p class="gestor-usuario">
+                    <i class="fas fa-user"></i> 
+                    <span id="infoUsuario">Cargando...</span>
+                </p>
+            </div>
+            <button id="btnCerrarSesion" class="btn-cerrar-sesion">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </button>
+        </div>
+
+        <!-- Estadísticas -->
+        <div class="estadisticas-container">
+            <div class="stat-card stat-total">
+                <div class="stat-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="statTotal">0</h3>
+                    <p>Total de Tareas</p>
+                </div>
+            </div>
+            <div class="stat-card stat-pendientes">
+                <div class="stat-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="statPendientes">0</h3>
+                    <p>Pendientes</p>
+                </div>
+            </div>
+            <div class="stat-card stat-completadas">
+                <div class="stat-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="statCompletadas">0</h3>
+                    <p>Completadas</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario para nueva tarea -->
+        <div class="formulario-container">
+            <h2 class="seccion-titulo">
+                <i class="fas fa-plus-circle"></i> Agregar Nueva Actividad
+            </h2>
+            <form id="formNuevaTarea" class="form-tarea">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tituloTarea">Título de la actividad *</label>
+                        <input 
+                            type="text" 
+                            id="tituloTarea" 
+                            name="titulo" 
+                            placeholder="Ej: Parcial de Cálculo"
+                            required
+                            maxlength="100"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="fechaLimite">Fecha límite</label>
+                        <input 
+                            type="date" 
+                            id="fechaLimite" 
+                            name="fechaLimite"
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcionTarea">Descripción</label>
+                    <textarea 
+                        id="descripcionTarea" 
+                        name="descripcion" 
+                        rows="3"
+                        placeholder="Describe los detalles de la actividad..."
+                        maxlength="500"
+                    ></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="prioridad">Prioridad *</label>
+                        <select id="prioridad" name="prioridad" required>
+                            <option value="baja">Baja</option>
+                            <option value="media" selected>Media</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn-agregar">
+                            <i class="fas fa-plus"></i> Agregar Actividad
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filtros-container">
+            <h2 class="seccion-titulo">
+                <i class="fas fa-filter"></i> Mis Actividades
+            </h2>
+            <div class="filtros-botones">
+                <button class="filtro-btn activo" data-filtro="todas">
+                    <i class="fas fa-list"></i> Todas
+                </button>
+                <button class="filtro-btn" data-filtro="pendientes">
+                    <i class="fas fa-clock"></i> Pendientes
+                </button>
+                <button class="filtro-btn" data-filtro="completadas">
+                    <i class="fas fa-check"></i> Completadas
+                </button>
+            </div>
+        </div>
+
+        <!-- Lista de tareas -->
+        <div id="contenedorTareas" class="tareas-container">
+            <div id="listaTareas" class="lista-tareas">
+                <!-- Las tareas se renderizarán aquí dinámicamente -->
+            </div>
+        </div>
+    </div>
 
     <h5 class="info"></h5>
 </body>

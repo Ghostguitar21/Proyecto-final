@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Gestor de Tareas</title>
+</head>
+<body>
+    <h1>Prueba de Funcionalidad del Gestor</h1>
+    <div id="resultado"></div>
+
+    <script>
+        // Simular inicio de sesión
+        const usuario = {
+            email: 'estudiante@uao.edu.co',
+            fechaIngreso: new Date().toISOString()
+        };
+        localStorage.setItem('uao_usuario', JSON.stringify(usuario));
+
+        // Crear tareas de prueba
+        const tareasPrueba = [
+            {
+                id: '1',
+                titulo: 'Parcial de Cálculo',
+                descripcion: 'Estudiar derivadas e integrales',
+                fechaLimite: '2025-11-25',
+                prioridad: 'alta',
+                completada: false,
+                fechaCreacion: new Date().toISOString()
+            },
+            {
+                id: '2',
+                titulo: 'Proyecto de Programación',
+                descripcion: 'Terminar el módulo de autenticación',
+                fechaLimite: '2025-11-30',
+                prioridad: 'media',
+                completada: false,
+                fechaCreacion: new Date().toISOString()
+            },
+            {
+                id: '3',
+                titulo: 'Lectura de Filosofía',
+                descripcion: 'Leer capítulos 3 y 4',
+                fechaLimite: '2025-11-22',
+                prioridad: 'baja',
+                completada: true,
+                fechaCreacion: new Date().toISOString()
+            }
+        ];
+
+        localStorage.setItem('uao_tareas', JSON.stringify(tareasPrueba));
+
+        // Verificar
+        const usuarioGuardado = JSON.parse(localStorage.getItem('uao_usuario'));
+        const tareasGuardadas = JSON.parse(localStorage.getItem('uao_tareas'));
+
+        document.getElementById('resultado').innerHTML = `
+            <h2>✅ Datos guardados correctamente</h2>
+            <h3>Usuario:</h3>
+            <pre>${JSON.stringify(usuarioGuardado, null, 2)}</pre>
+            <h3>Tareas (${tareasGuardadas.length}):</h3>
+            <pre>${JSON.stringify(tareasGuardadas, null, 2)}</pre>
+            <br>
+            <a href="calendario.html" style="font-size: 20px; padding: 10px 20px; background: #890000; color: white; text-decoration: none; border-radius: 5px;">
+                Ir al Gestor de Actividades
+            </a>
+        `;
+
+        console.log('✅ Test completado exitosamente');
+        console.log('Usuario:', usuarioGuardado);
+        console.log('Tareas:', tareasGuardadas);
+    </script>
+</body>
+</html>
