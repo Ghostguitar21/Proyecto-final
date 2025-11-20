@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 /* TIP: paleta basada en la imagen proporcionada */
 :root{
@@ -73,11 +73,15 @@ header,
 
 /* Asegurar links con paleta y prioridad */
 .navbar .nav-link {
-  color: var(--grey-2) !important;
+  color: black ;
+  font-weight: bold;
 }
 .navbar .nav-link:hover,
 .navbar .nav-link.active {
-  color: var(--primary-red) !important;
+    color:#D9D9D9;
+    border-radius: 5px;
+    background: #79102D;
+    
 }
 
 /* Si la imagen/logo trae un fondo rojo, forzar transparencia */
@@ -186,3 +190,11 @@ canvas#game {
 
 /* conservamos helpers */
 .texto-bold { font-weight: 700; }
+
+.top-bar{
+  background-color: #9e0b0f;
+  height: 50px;
+  width: 100%;
+  margin: 0;
+  z-index: 100;
+}
