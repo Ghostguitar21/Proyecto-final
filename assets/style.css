@@ -1,362 +1,188 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    text-align: center;
-    background-color: #ffffff;
+/* TIP: paleta basada en la imagen proporcionada */
+:root{
+  --primary-red: #ed1d24;   /* Rojo principal */
+  --red-2: #510608;
+  --red-3: #8b0304;
+  --red-4: #9e0b0f;
+  --red-5: #c4161c;
+  --red-6: #f82e35;
+  --red-7: #fe6a6f;
 
+  --black: #000000;
+  --white: #ffffff;
+
+  --grey-1: #363636;
+  --grey-2: #666666;
+  --grey-3: #9e9e9e;
+  --grey-4: #d1d1d1;
+  --grey-5: #f4f4f4;
 }
 
-h1, h2, h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700; 
+/* Tipografía y base */
+body, html {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto; /* permitir scroll vertical */
+  background-color: var(--white);
+  color: var(--grey-1);
+  -webkit-font-smoothing:antialiased;
 }
 
-strong, b {
-    font-weight: 700; 
+/* Encabezados */
+h1, h2, h3 { font-weight: 700; color: var(--black); }
+
+/* Navbar / logo (prioridad alta con !important) */
+.navbar { background: var(--white) !important; }
+.navbar-brand { display:flex; align-items:center; gap:.5rem; }
+.navbar-brand img {
+  max-height: 44px !important; /* tamaño pequeño y consistente */
+  width: auto !important;
+  display: inline-block !important;
 }
 
-.texto-bold {
-    font-weight: 700; 
+/* Nav links */
+.navbar .nav-link {
+  color: var(--grey-2);
+}
+.navbar .nav-link:hover {
+  color: var(--primary-red);
+}
+.navbar .nav-link.active {
+  color: var(--primary-red);
+  font-weight: 600;
 }
 
-
-:root {
-
---primary-color: #890000;
---accent-color: #79102D;
---background-color: #D9D9D9;
---extra-color: #fff;
-
+/* Override: asegurar header/nav blanco y neutro */
+header,
+.navbar,
+.navbar-light,
+.navbar.bg-light,
+.navbar.navbar-light {
+  background-color: var(--white) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--grey-4);
 }
 
-
-
-.header-area {
-    position: relative; 
-    height: 50px;
-    width: 100%;
-    background-color: #890000;
-  
+/* Asegurar links con paleta y prioridad */
+.navbar .nav-link {
+  color: var(--grey-2) !important;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--primary-red) !important;
 }
 
-
-.header_navegation{
-    display: flex;
-    justify-content: flex-end;
-    gap: 50px;
-    padding: 20px;
-    font-size: 20px;   
-
+/* Si la imagen/logo trae un fondo rojo, forzar transparencia */
+.navbar-brand img {
+  background: transparent !important;
+  max-height: 44px !important;
 }
 
-@media (max-width: 1024px){
-    .header_navegation {
-        font: 18px;
-    }
+/* Elimina posibles fondos aplicados por otras clases */
+.header-area, .hero-container, .site-header {
+  background: transparent !important;
+  background-image: none !important;
 }
 
-@media (max-width: 768px) {
-    .header_navegation{
-        font-size: 16px;
-    }
-    
+/* Contenedor principal */
+main.container {
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
 }
 
-@media (max-width: 480px) {
-    .header_navegation{
-        font-size: 14px;
-    }
-    
-}
-
-
-.header_navegation a{
-
-    color: #890000;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    padding: 15px 25px;
-    display: inline-block;
-    font-weight: bold;
-    font-family: "Montserrat";
-
-
-}
-
-.header_navegation a:hover{
-
-    color:#D9D9D9;
-    border-radius: 5px;
-    background: #79102D;
-}
-
-.logo {
-    position: absolute;
-    margin-top: 20px;
-    height: 50px;
-    left: 10px;
-    width: auto;
-    max-width: 100%;
-}
-
-
-@media (max-width: 1024px){
-    .logo {
-        height: 45px;
-        margin-top: 15px;
-        left: 10px;
-    }
-}
-
-@media (max-width: 768px) {
-    .logo{
-        height: 40px;
-        margin-top: 15px;
-        left: 10px;
-    }
-    
-}
-
-@media (max-width: 480px) {
-    .logo{
-        height: 30px;
-        margin-top: 10px;
-        left: 5px;
-    }
-    
-}
-
-.hero-container {
-    position: absolute; 
-    width: 100%;
-    margin-bottom: 0;
-    z-index: 10;
-}
-
-
+/* Hero / banner simplificado (evita posicionamientos absolutos que recortan) */
 .banner {
-    position: relative;
-    height: 500px;
-    display: block; 
-    margin-top: 45px;
-    width: 100%;
-    max-width: 100%;
-    object-fit: cover;
-    object-position: center;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-radius: .5rem;
 }
 
-
-@media (max-width: 1024px){
-    .banner {
-        height: 400px;
-        margin-top: 40px;
-    }
+/* Textos de hero ya no usan valores absolutos */
+.header_title, .header_subtitle {
+  position: static;
+  color: var(--black);
 }
 
+/* Botones con paleta */
+.btn-primary {
+  background-color: var(--primary-red);
+  border-color: var(--primary-red);
+  color: var(--white);
+}
+.btn-primary:hover {
+  background-color: var(--red-5);
+  border-color: var(--red-5);
+}
+.btn-outline-secondary {
+  color: var(--primary-red);
+  border-color: var(--primary-red);
+}
+.btn-outline-secondary:hover {
+  background: var(--primary-red);
+  color: var(--white);
+}
+
+/* Cards y acentos */
+.card {
+  border-radius: .5rem;
+  border: 1px solid var(--grey-4);
+}
+.card .card-title { color: var(--black); }
+
+/* Video responsive safe area */
+.ratio.ratio-16x9, .video-responsive {
+  max-height: 60vh;    /* evita que el video sobrepase la pantalla */
+  overflow: hidden;
+  border-radius: .5rem;
+}
+
+/* Lista de actividades modernizada */
+.list-group-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  border: 1px solid var(--grey-4);
+  background: var(--white);
+}
+
+/* Tetris canvas look consistente con paleta */
+canvas#game {
+  background: linear-gradient(180deg, #0b0d2a 0%, #141737 100%);
+  display: block;
+  margin: 0 auto;
+  border-radius: .25rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* Texto pequeño/muted */
+.text-muted, .small { color: var(--grey-3) !important; }
+
+/* Ajustes responsivos */
 @media (max-width: 768px) {
-    .banner{
-        height: 300px;
-        margin-top: 35px;
-    }
-    
+  .display-6 { font-size: 1.6rem; }
+  .navbar-brand img { max-height: 36px !important; }
+  .banner { height: auto; }
 }
 
-@media (max-width: 480px) {
-    .banner{
-        height: 200px;
-        margin-top: 25px;
-    }
-    
+/* Limpieza: elimina reglas conflictivas antiguas */
+.logo, .header-area, .header_navegation, .hero-container {
+  position: static !important;
+  height: auto !important;
+  margin: 0 !important;
 }
 
-
-.header_title {
-    position: relative;
-    text-align: left; 
-    top: 216px;         
-    left: 161px;        
-    z-index: 10;        
-    font-family: "Montserrat";
-    font-size: 36px;
-    color: #fff; 
-}
- 
-
-@media (max-width: 1024px){
-    .header_title {
-        font-size: 25px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header_title{
-        font-size: 20px;
-    }
-    
-}
-
-@media (max-width: 480px) {
-    .header_title{
-        font-size: 15px;
-    }
-    
-}
-
-.header_subtitle {
-    position: relative;
-    text-align: left;
-    top: 190px;         
-    left: 165px;       
-    z-index: 10;
-    font-family: "Montserrat";
-    font-size: 15px;
-    color: #fff; 
-    margin: 0;
-}
-
-
-.header_body {
-    position: relative;
-    top: 50px;
-    font-family: "Montserrat";
-    font-size: 20px;
-    color: #333;
-    margin: 0 auto;
-    max-width: 900px;
-    padding: 0 40px;
-    text-align: left;
-    line-height: 1;
-
-}
-
-
-
-@media (max-width: 1024px){
-    .header_body {
-     top: 35px;
-     font-size: 16px;
-     max-width: 700px;
-     padding: 0 35px;   
-    }
-}
-
-@media (max-width: 768px) {
-    .header_body{
-     top: 30px;
-     font-size: 15px;
-     max-width: 600px;
-     padding: 0 30px; 
-    }
-    
-}
-
-@media (max-width: 480px) {
-    .header_body{
-     top: 25px;
-     font-size: 14px;
-     max-width: 100%;
-     padding: 0 25px; 
-    }
-    
-}
-
-.boton{
-
-    
-    position: relative;
-    top: 100px;
-    margin: 50px auto;
-    font-size: 26px;
-    font-family: "Montserrat";
-    color:#890000;
-    outline: 5px solid #890000;
-    border-radius: 5px;
-    padding: 20px 30px;
-    font-weight: bold;
-    text-align: left;
-    cursor: pointer;
-
-}
-
-@media (max-width: 1024px){
-    .boton {
-     font-size: 19px;
-        
-    }
-}
-
-@media (max-width: 768px) {
-    .boton{
-     font-size: 16px;
-    }
-    
-}
-
-@media (max-width: 480px) {
-    .boton{
-     font-size: 12px; 
-    }
-    
-}
-
-
-
-.info {
-    position: relative; 
-    top: 320px;
-    height: 50px;
-    width: 100%;
-    background-color: #79102D;
-}
-
-
-.Cuerpo {
-overflow: scroll;   
-
-}
-
-.Center {
-    margin: 50px auto;
-    padding: 40px;
-    width: 1100px;
-    background-color: #79102D;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.6);
-    text-align: center;
-}
-
-.bar{
-
-    background-color: #D9D9D9;
-    height: 90px;
-
-}
-
-@media (max-width: 1024px){
-    video {
-        height: auto;
-        width: 90%;
-        max-width: 900px;
-    }
-}
-
-@media (max-width: 768px) {
-  .video {
-        height: auto;
-        width: 95%;
-        max-width: 700px;
-    }
-}
-
-@media (max-width: 480px) {
-    .video {
-        height: auto;
-        width: 100%;
-        max-width: 100%;
-    }
-}
+/* conservamos helpers */
+.texto-bold { font-weight: 700; }

@@ -3,26 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto final</title>
+    <title>Técnicas - Proyecto final</title>
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets\style.css"/>
-    <script src="assets/main.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/style.css"/>
 </head>
 <body>
- <header class="header-area">
-        
-    </header>
-    <div class="bar">
-    <img class="logo" src="imagenes\UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo"> 
-     <nav class="header_navegation">
-        <a href="index.html">Inicio</a>
-        <a href="calendario.html">Gestionar actividades</a>
-        <a href="juego.html">Juego</a>
-        </nav>
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="imagenes/UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo" class="img-fluid">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navVid" aria-controls="navVid" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navVid">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="calendario.html">Actividades</a></li>
+          <li class="nav-item"><a class="nav-link active" href="video.html">Técnicas</a></li>
+          <li class="nav-item"><a class="nav-link" href="juego.html">Juego</a></li>
+        </ul>
+      </div>
     </div>
- <h1 class="Center"></h1>
-<video class="video" width="1920" height="1080" src="imagenes\Meditación para Reducir Estrés, Ansiedad y Pensamientos Negativos (10 min).mp4"  controls></video>
-    <h5 class="info"></h5>
+  </nav>
+</header>
+
+<main class="container py-4">
+  <h1 class="text-center mb-4">Técnicas rápidas para reducir el estrés</h1>
+
+  <div class="row g-4">
+    <!-- Player -->
+    <div class="col-lg-8">
+      <div class="ratio ratio-16x9 shadow-sm rounded video-responsive">
+        <video id="player-video" controls style="width:100%; height:100%; object-fit:contain;">
+          <!-- Fuente inicial (no autoplay). Se cambia desde el playlist con JS -->
+          <source src="imagenes/Meditación para Reducir Estrés, Ansiedad y Pensamientos Negativos (10 min).mp4" type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      </div>
+      <div class="mt-2 d-flex gap-2">
+        <button id="btn-download" class="btn btn-outline-secondary btn-sm">Descargar video</button>
+        <button id="btn-contrast" class="btn btn-outline-secondary btn-sm">Modo alto contraste</button>
+      </div>
+    </div>
+
+    <!-- Playlist / notas -->
+    <div class="col-lg-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Selecciona un video</h5>
+          <p class="card-text small text-muted">Clic en un elemento para cargarlo en el reproductor. No se reproduce automáticamente: presiona Play cuando quieras.</p>
+
+          <div id="playlist" class="list-group">
+            <button type="button" class="list-group-item list-group-item-action active" data-src="Meditación para Reducir Estrés, Ansiedad y Pensamientos Negativos (10 min).mp4">
+              Meditación (10 min) — Reducir estrés y ansiedad
+            </button>
+            <button type="button" class="list-group-item list-group-item-action" data-src="TÉCNICA RESPIRACIÓN PARA LA ANSIEDAD - LA CAJA  The vortex way.mp4">
+              Técnica: Respiración para la ansiedad — "La caja" (The vortex way)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">Practica en 2 minutos</h6>
+          <p class="card-text">Respiración 4-4-4: inhala 4s, mantén 4s, exhala 4s. Repite 4 veces.</p>
+          <ul>
+            <li>Respira conscientemente</li>
+            <li>Estira cuello y hombros</li>
+            <li>Tomar breves descansos activos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="bg-light py-3 mt-auto">
+  <div class="container text-center">
+    <small>&copy; Universidad Autónoma de Occidente — Técnicas</small>
+  </div>
+</footer>
+
+<script>
+  // Playlist: carga el archivo seleccionado en el player sin autoplay
+  (function(){
+    const basePath = 'imagenes/';
+    const player = document.getElementById('player-video');
+    const playlist = document.getElementById('playlist');
+    const items = playlist.querySelectorAll('[data-src]');
+
+    function setSource(filename, activate = true) {
+      const src = basePath + filename;
+      // usa encodeURI para espacios/caracteres especiales
+      const encoded = encodeURI(src);
+      // reemplaza source y carga
+      const sourceEl = player.querySelector('source');
+      sourceEl.src = encoded;
+      player.pause();
+      player.load();
+      // actualizar botón de descarga
+      document.getElementById('btn-download').onclick = () => {
+        const a = document.createElement('a');
+        a.href = encoded;
+        a.download = filename;
+        a.click();
+      };
+      // marcar activo en la lista
+      if (activate) {
+        items.forEach(i => i.classList.remove('active'));
+        const match = Array.from(items).find(i => i.dataset.src === filename);
+        if (match) match.classList.add('active');
+      }
+    }
+
+    // bind clicks
+    items.forEach(btn => {
+      btn.addEventListener('click', () => {
+        setSource(btn.dataset.src);
+      });
+    });
+
+    // contraste alterno (ejemplo simple)
+    document.getElementById('btn-contrast').addEventListener('click', () => {
+      document.body.classList.toggle('high-contrast');
+    });
+
+    // inicial (mantener la fuente definida en HTML, pero sincronizar download)
+    const initial = playlist.querySelector('.active');
+    if (initial) setSource(initial.dataset.src, false);
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

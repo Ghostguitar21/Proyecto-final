@@ -1,28 +1,288 @@
 <!DOCTYPE html>
-<html lang="es-ES">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyecto final</title>
-    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"/>
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets\style.css"/>
-    <script src="assets/main.js"></script>
-</head>
-<body>
- <header class="header-area">
-        
-    </header>
-    <div class="bar">
-    <img class="logo" src="imagenes\UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="El logo"> 
-     <nav class="header_navegation">
-        <a href="index.html">Inicio</a>
-        <a href="video.html">Video</a>
-        <a href="juego.html">Juego</a>
-        </nav>
-    </div>
- 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestor de Tiempo y Actividades | UAO</title>
 
-    <h5 class="info"></h5>
+  <!-- Bootstrap 5.3 + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- FullCalendar v6 -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+
+  <style>
+    body { background: #f8f9fa; min-height: 100vh; display: flex; flex-direction: column; }
+    .fc { --fc-border-color: #e0e0e0; }
+    .fc-button-primary { background-color: #0d6efd; border: none; }
+    .fc-button-primary:hover { background-color: #0b5ed7; }
+    .event-work { background-color: #0d6efd; border-color: #0d6efd; }
+    .event-personal { background-color: #198754; border-color: #198754; }
+    .event-study { background-color: #fd7e14; border-color: #fd7e14; }
+    .event-other { background-color: #6c757d; border-color: #6c757d; }
+    footer { margin-top: auto; }
+  </style>
+</head>
+<body class="d-flex flex-column">
+
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <img src="imagenes/UAO-LOGO-NUEVO_Mesa-de-trabajo-1-1-1-1.png" alt="UAO" height="45">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link active" href="calendario.html">Actividades</a></li>
+            <li class="nav-item"><a class="nav-link" href="video.html">Técnicas</a></li>
+            <li class="nav-item"><a class="nav-link" href="juego.html">Juego</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container py-5 flex-grow-1">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-4 col-xxl-3 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Nueva Actividad</h5>
+            <form id="eventForm">
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Título</label>
+                <input type="text" id="eventTitle" class="form-control" required>
+              </div>
+              <div class="row mb-3">
+                <div class="col-6">
+                  <label class="form-label fw-semibold">Inicio</label>
+                  <input type="datetime-local" id="eventStart" class="form-control" required>
+                </div>
+                <div class="col-6">
+                  <label class="form-label fw-semibold">Fin</label>
+                  <input type="datetime-local" id="eventEnd" class="form-control">
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Categoría</label>
+                <select id="eventCategory" class="form-select">
+                  <option value="work">Trabajo / Proyecto</option>
+                  <option value="study">Estudio</option>
+                  <option value="personal">Personal</option>
+                  <option value="other">Otro</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Descripción (opcional)</label>
+                <textarea id="eventDescription" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary">Guardar Actividad</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="card shadow-sm mt-3">
+          <div class="card-body">
+            <h6 class="card-title">Categorías</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge bg-primary">Trabajo</span>
+              <span class="badge bg-success">Personal</span>
+              <span class="badge bg-warning text-dark">Estudio</span>
+              <span class="badge bg-secondary">Otro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendario -->
+      <div class="col-lg-8 col-xxl-9">
+        <div class="card shadow-sm">
+          <div class="card-body p-3">
+            <div id="calendar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-light py-4 mt-auto">
+    <div class="container text-center">
+      <small class="text-muted">© 2025 Universidad Autónoma de Occidente — Gestor de Tiempo y Actividades</small>
+    </div>
+  </footer>
+
+  <!-- Modal de detalles del evento -->
+  <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg">
+        <div class="modal-header border-0">
+          <h5 class="modal-title fw-bold" id="eventModalLabel">Detalles de la actividad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <h4 id="modalTitle" class="mb-3"></h4>
+          <p><strong>Inicio:</strong> <span id="modalStart"></span></p>
+          <p><strong>Fin:</strong> <span id="modalEnd"></span></p>
+          <p><strong>Categoría:</strong> <span id="modalCategory" class="badge bg-primary"></span></p>
+          <p><strong>Descripción:</strong></p>
+          <p id="modalDescription" class="text-muted bg-light p-3 rounded"></p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" id="btnDelete" class="btn btn-outline-danger">Eliminar</button>
+          <button type="button" id="btnEdit" class="btn btn-primary">Editar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarEl = document.getElementById('calendar');
+      const form = document.getElementById('eventForm');
+      const titleInput = document.getElementById('eventTitle');
+      const startInput = document.getElementById('eventStart');
+      const endInput = document.getElementById('eventEnd');
+      const categoryInput = document.getElementById('eventCategory');
+      const descInput = document.getElementById('eventDescription');
+
+      let calendar;
+      let selectedEvent = null;
+
+      function loadEvents() {
+        const saved = localStorage.getItem('calendarEvents');
+        return saved ? JSON.parse(saved) : [];
+      }
+
+      function saveEvents(events) {
+        localStorage.setItem('calendarEvents', JSON.stringify(events));
+      }
+
+      calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: window.innerWidth < 768 ? 'timeGridDay' : 'timeGridWeek',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        buttonText: {
+          today: 'Hoy',
+          month: 'Mes',
+          week: 'Semana',
+          day: 'Día'
+        },
+        locale: 'es',
+        editable: true,
+        selectable: true,
+        events: loadEvents(),
+
+        eventClick: function(info) {
+          selectedEvent = info.event;
+
+          document.getElementById('modalTitle').textContent = info.event.title;
+          document.getElementById('modalStart').textContent = new Date(info.event.start).toLocaleString('es-CO');
+          document.getElementById('modalEnd').textContent = info.event.end 
+            ? new Date(info.event.end).toLocaleString('es-CO') 
+            : 'No tiene hora de fin';
+          
+          const cat = info.event.extendedProps.category || 'other';
+          const catText = { work: 'Trabajo / Proyecto', study: 'Estudio', personal: 'Personal', other: 'Otro' };
+          const badgeEl = document.getElementById('modalCategory');
+          badgeEl.textContent = catText[cat];
+          badgeEl.className = `badge bg-${cat === 'work' ? 'primary' : cat === 'study' ? 'warning text-dark' : cat === 'personal' ? 'success' : 'secondary'}`;
+
+          document.getElementById('modalDescription').textContent = 
+            info.event.extendedProps.description || 'Sin descripción adicional';
+
+          new bootstrap.Modal(document.getElementById('eventModal')).show();
+        },
+
+        select: function(info) {
+          startInput.value = info.startStr.slice(0,16);
+          if (info.endStr) endInput.value = info.endStr.slice(0,16);
+          calendar.unselect();
+        },
+
+        eventClassNames: function(arg) {
+          return `event-${arg.event.extendedProps.category || 'other'}`;
+        }
+      });
+      calendar.render();
+
+      // Guardar / Editar
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const eventData = {
+          id: selectedEvent ? selectedEvent.id : Date.now().toString(),
+          title: titleInput.value.trim() || 'Sin título',
+          start: startInput.value,
+          end: endInput.value || null,
+          extendedProps: {
+            description: descInput.value.trim(),
+            category: categoryInput.value
+          }
+        };
+
+        if (selectedEvent) {
+          selectedEvent.setProp('title', eventData.title);
+          selectedEvent.setStart(eventData.start);
+          selectedEvent.setEnd(eventData.end);
+          selectedEvent.setExtendedProp('description', eventData.extendedProps.description);
+          selectedEvent.setExtendedProp('category', eventData.extendedProps.category);
+          selectedEvent = null;
+        } else {
+          calendar.addEvent(eventData);
+        }
+
+        saveEvents(calendar.getEvents().map(e => ({
+          id: e.id,
+          title: e.title,
+          start: e.start.toISOString(),
+          end: e.end ? e.end.toISOString() : null,
+          extendedProps: e.extendedProps
+        })));
+
+        form.reset();
+        bootstrap.Modal.getInstance(document.getElementById('eventModal'))?.hide();
+      });
+
+      // Editar desde modal
+      document.getElementById('btnEdit').addEventListener('click', () => {
+        titleInput.value = selectedEvent.title;
+        startInput.value = selectedEvent.start.toISOString().slice(0,16);
+        endInput.value = selectedEvent.end ? selectedEvent.end.toISOString().slice(0,16) : '';
+        descInput.value = selectedEvent.extendedProps.description || '';
+        categoryInput.value = selectedEvent.extendedProps.category || 'other';
+        bootstrap.Modal.getInstance(document.getElementById('eventModal')).hide();
+      });
+
+      // Eliminar desde modal
+      document.getElementById('btnDelete').addEventListener('click', () => {
+        if (confirm('¿Seguro que deseas eliminar esta actividad?')) {
+          selectedEvent.remove();
+          saveEvents(calendar.getEvents().map(e => ({
+            id: e.id,
+            title: e.title,
+            start: e.start.toISOString(),
+            end: e.end ? e.end.toISOString() : null,
+            extendedProps: e.extendedProps
+          })));
+          bootstrap.Modal.getInstance(document.getElementById('eventModal')).hide();
+        }
+      });
+    });
+  </script>
 </body>
 </html>
