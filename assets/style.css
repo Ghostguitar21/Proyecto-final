@@ -172,7 +172,7 @@ canvas#game {
 }
 
 /* Texto pequeño/muted */
-.text-muted, .small { color: var(--grey-3) !important; }
+.text-muted, .small { color: #8b0304}
 
 /* Ajustes responsivos */
 @media (max-width: 768px) {
@@ -197,4 +197,22 @@ canvas#game {
   width: 100%;
   margin: 0;
   z-index: 100;
+}
+
+.Titulo12{
+
+  color: #fe6a6f;
+  flex: auto;
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 5px;
+
+  
+
+}
+.cuerpoPeligro{
+  color: #000000;
+  flex: auto;
+  width: 900px;
+
 }
