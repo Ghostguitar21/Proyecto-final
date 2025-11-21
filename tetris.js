@@ -57,7 +57,12 @@
   function resizeCanvasToContainer() {
     const container = canvas.parentElement;
     const cssWidth = Math.min(420, container.clientWidth);
-    gridSize = Math.max(12, Math.floor(cssWidth / gridWidth));
+    // Respect both available width and available height so the canvas never becomes taller
+    // than the viewport area allocated for the game (prevents page vertical scrolling).
+    const containerHeight = container.clientHeight || (window.innerHeight - 220);
+    const maxGridSizeByWidth = Math.floor(cssWidth / gridWidth);
+    const maxGridSizeByHeight = Math.floor(containerHeight / gridHeight);
+    gridSize = Math.max(12, Math.min(maxGridSizeByWidth, maxGridSizeByHeight));
     canvas.width = gridWidth * gridSize;
     canvas.height = gridHeight * gridSize;
     gridTopLeft.x = 0;
@@ -180,6 +185,10 @@
 
       document.addEventListener('keydown', (e) => {
         if (!current) return;
+        // Evita que las flechas provoquen el scroll de la página mientras el juego corre
+        if (running && e.key && e.key.startsWith && e.key.startsWith('Arrow')) {
+          e.preventDefault();
+        }
         if (e.key === 'ArrowLeft' && !collision(current, -1, 0)) current.move(-1,0);
         if (e.key === 'ArrowRight' && !collision(current, 1, 0)) current.move(1,0);
         if (e.key === 'ArrowUp') {
@@ -198,6 +207,8 @@
         running = true;
         lastTime = 0;
         rafId = requestAnimationFrame(step);
+        // ensure the canvas has keyboard focus so arrow keys go to the game
+        try { canvas.focus(); } catch (e) { /* ignore */ }
       }
     },
 
